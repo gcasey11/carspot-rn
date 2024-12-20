@@ -3,6 +3,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getStorage } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that we want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,3 +27,6 @@ export const firebaseConfig = {
 // TODO: Need to declare this in a 'central' function
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const storage = getStorage(app);
+
+export { app, storage }
