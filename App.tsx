@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from './screens/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import SocialScreen from './screens/SocialScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 // Define the type for the Bottom Tabs navigation
 export type BottomTabParamList = {
@@ -22,10 +24,16 @@ export default function App() {
           tabBarIcon: ({ color, size }) => {
             let iconName: keyof typeof Ionicons.glyphMap = 'help';
 
-            if (route.name === 'Home') {
-              iconName = 'home-outline';
+            // Assigning icons to navigation buttons based on name
+              // Full credit to Ionicons for these
+            if (route.name === 'Garage') {
+                iconName = 'car-outline';
             } else if (route.name === 'Settings') {
-              iconName = 'settings-outline';
+                iconName = 'settings-outline';
+            } else if (route.name === 'Social Feed') {
+                iconName = 'chatbubble-outline';
+            } else if (route.name === 'Profile') {
+                iconName = 'person-outline';
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -34,7 +42,9 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Social Feed" component={SocialScreen} />
+        <Tab.Screen name="Garage" component={HomeScreen} />
+        <Tab.Screen name="Profile" component={ProfileScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
     </NavigationContainer>
