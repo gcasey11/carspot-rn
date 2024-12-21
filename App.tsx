@@ -32,11 +32,11 @@ export default function App() {
               iconName = 'car-outline';
             } else if (route.name === 'Settings') {
               iconName = 'settings-outline';
-            } else if (route.name === 'Social Feed') {
+            } else if (route.name === 'SocialFeed') {
               iconName = 'chatbubble-outline';
             } else if (route.name === 'Profile') {
               iconName = 'person-outline';
-            } else if (route.name === 'Add Car') {
+            } else if (route.name === 'AddCar') {
               iconName = 'add-circle-outline';
             }
 
@@ -46,9 +46,9 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         })}
       >
-        <Tab.Screen name="Social Feed" component={SocialScreen} />
+        <Tab.Screen name="SocialFeed" component={SocialScreen} />
         <Tab.Screen name="Garage" component={GarageScreen} />
-        <Tab.Screen name="Add Car" component={AddCarScreen} />
+        <Tab.Screen name="AddCar" component={AddCarScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
