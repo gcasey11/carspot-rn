@@ -10,35 +10,53 @@ export default function HomeScreen() {
   const route = useRoute<Route>();
   const { newCar } = route.params || {};
 
-  const [carMap, setCarMap] = React.useState<{ [key: string]: string[] }>({
-    Lamborghini: ["Aventador", "Huracán", "Urus"],
-    Porsche: ["911", "Cayenne", "Taycan"],
-    Ferrari: ["488", "Roma", "SF90"],
+  const [carMap, setCarMap] = React.useState<{
+    [key: string]: { model: string; photo: string | null }[];
+  }>({
+    Lamborghini: [
+      { model: "Aventador", photo: null },
+      { model: "Huracán", photo: null },
+      { model: "Urus", photo: null },
+    ],
+    Porsche: [
+      { model: "911", photo: null },
+      { model: "Cayenne", photo: null },
+      { model: "Taycan", photo: null },
+    ],
+    Ferrari: [
+      { model: "488", photo: null },
+      { model: "Roma", photo: null },
+      { model: "SF90", photo: null },
+    ],
   });
-
+  
   React.useEffect(() => {
     if (newCar) {
-      const { make, model } = newCar;
-
-      setCarMap(prevCarMap => {
-        // If the make already exists, add the model to the list
+      const { make, model, photo } = newCar;
+  
+      setCarMap((prevCarMap) => {
+        // If the make already exists, add the new car to the list
         if (prevCarMap[make]) {
           return {
             ...prevCarMap,
-            [make]: [...prevCarMap[make], model], // Add model to the existing list
+            [make]: [
+              ...prevCarMap[make],
+              { model, photo }, // Add model and photo to the existing list
+            ],
           };
         } else {
           // If the make doesn't exist, create a new list for the make
           return {
             ...prevCarMap,
-            [make]: [model],
+            [make]: [{ model, photo }],
           };
         }
       });
-
-      console.log('New car added:', newCar);
+  
+      console.log("New car added:", newCar);
     }
   }, [newCar]);
+  
 
   return (
     <View style={styles.container}>

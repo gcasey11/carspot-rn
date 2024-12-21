@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     marginBottom: 20,
-    height: '30%',
+    height: '50%',
   },
   photoButtonText: {
     color: '#fff',

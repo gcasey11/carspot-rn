@@ -1,11 +1,18 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
-export default function CarComponent({ carModel }: { carModel: string }) {
+export default function CarComponent({ carModel, carPhoto }: { carModel: string, carPhoto: string | null }) {
     return (
       <View style={styles.carContainer}>
-        <Text style={styles.carText}>{carModel}</Text>
-      </View>
+      {carPhoto ? (
+        <Image source={{ uri: carPhoto }} style={styles.carPhoto} />
+      ) : (
+        <View>
+          <Text>No Photo</Text>
+        </View>
+      )}
+      <Text style={styles.carModel}>{carModel}</Text>
+    </View>
     );
   }
 
@@ -28,8 +35,19 @@ export default function CarComponent({ carModel }: { carModel: string }) {
       borderWidth: 1,
       borderColor: '#ddd',
     },
-    carText: {
+    carModel: {
       fontSize: 18,
       textAlign: 'center',
     },
+    placeholder: {
+      textAlign: 'center',
+    },
+    carPhoto: {
+      width: 100,
+      height: 100,
+      borderRadius: 10,
+      marginBottom: 10,
+    },
+
+
   });
