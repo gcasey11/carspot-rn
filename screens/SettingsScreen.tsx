@@ -25,7 +25,11 @@ export default function SettingsScreen() {
   }, [name, email, password]);
 
   const validateForm = () => {
-    let errors = {};
+    let errors = {
+      email: '',
+      name: '',
+      password: ''
+    };
 
     // Validate name field
     if (!name) {
