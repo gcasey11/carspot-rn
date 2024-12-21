@@ -7,7 +7,7 @@ export default function CarListComponent({
   carList,
 }: {
   carMake: string;
-  carList: string[];
+  carList: { model: string; photo: string | null }[];
 }) {
   return (
     <View style={styles.container}>
@@ -15,7 +15,7 @@ export default function CarListComponent({
       <FlatList
         data={carList}
         keyExtractor={(item, index) => `${carMake}-${index}`}
-        renderItem={({ item }) => <CarComponent carModel={item} />}
+        renderItem={({ item }) => <CarComponent carModel={item.model} carPhoto={item.photo} />}
         horizontal // Enables horizontal scrolling
         showsHorizontalScrollIndicator={false} // Hides the scroll bar
         contentContainerStyle={styles.horizontalList}
