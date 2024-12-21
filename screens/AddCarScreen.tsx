@@ -6,6 +6,7 @@ import { ref, uploadBytes } from 'firebase/storage';
 import { useNavigation } from '@react-navigation/native';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { BottomTabParamList } from '../App'; // Adjust the path accordingly
+import { useActionSheet } from '@expo/react-native-action-sheet';
 
 
 
@@ -15,26 +16,55 @@ export default function AddCarScreen() {
   const [photo, setPhoto] = useState<string | null>(null);
   const navigation = useNavigation<BottomTabNavigationProp<BottomTabParamList>>();
 
+  const { showActionSheetWithOptions } = useActionSheet(); // Destructure the function from the hook
+
   const handleChoosePhoto = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const cameraPermissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
-    if (!permissionResult.granted) {
-      alert("You've refused to allow this app to access your photos!");
+    if (!permissionResult.granted || !cameraPermissionResult.granted) {
+      alert("You've refused to allow this app to access your photos or camera!");
       return;
     }
 
-    const result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      quality: 1,
-    });
+    // Show action sheet to choose between gallery or camera
+    const options = ['Choose from Gallery', 'Take a Photo', 'Cancel'];
+    const cancelButtonIndex = 2;
 
-    if (!result.canceled && result.assets && result.assets.length > 0) {
-      const selectedPhotoUri = result.assets[0].uri;
-      setPhoto(selectedPhotoUri);
-    } else {
-      console.log('Photo selection was canceled');
-    }
-  };
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      async (buttonIndex) => {
+        let result;
+
+        if (buttonIndex === 0) {
+          // Choose from Gallery
+          result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            quality: 1,
+          });
+        } else if (buttonIndex === 1) {
+          // Take a Photo
+          result = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            quality: 1,
+          });
+        } else {
+          console.log('Action Sheet was canceled');
+          return;
+        }
+
+        if (!result.canceled && result.assets && result.assets.length > 0) {
+          const selectedPhotoUri = result.assets[0].uri;
+          setPhoto(selectedPhotoUri); // Assuming setPhoto is a function to set your selected photo
+        } else {
+          console.log('Photo selection was canceled');
+        }
+      }
+    );
+  }
 
   const handleSubmit = async () => {
     const newCar = {
