@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function SocialScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome to the Social Feed Screen!</Text>
+      <Text style={styles.text}>Social Feed features Coming Soon!</Text>
     </View>
   );
 }
