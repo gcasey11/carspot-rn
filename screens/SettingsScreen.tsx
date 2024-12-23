@@ -1,11 +1,13 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+// TODO: Remove copied template for forms and sign up actions and replace with actual Settings Page content
+
+import React, { useState, useEffect } from 'react';
+import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 export default function SettingsScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>This is the Settings Screen</Text>
-    </View>
+      <View style={styles.container}>
+        <Text style={styles.text}>Settings page features Coming Soon!</Text>
+      </View>
   );
 }
 

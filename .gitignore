@@ -34,3 +34,11 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+/.idea/.gitignore
+/.idea/carspot-rn.iml
+/.idea/codeStyles/codeStyleConfig.xml
+/metro.config.js
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/codeStyles/Project.xml
+/.idea/vcs.xml
